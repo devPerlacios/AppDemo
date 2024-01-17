@@ -45,6 +45,7 @@ dependencies {
 
     val kotlinVersion = "1.9.22"
     val hiltVersion = "2.48"
+    val navVersion = "2.7.1"
 
     implementation("org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion")
     implementation("androidx.core:core-ktx:1.12.0")
@@ -63,19 +64,27 @@ dependencies {
     // Retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation ("com.squareup.okhttp3:logging-interceptor:4.9.1")
     //Corrutinas
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
     //dagger hilt
     implementation("com.google.dagger:hilt-android:$hiltVersion")
-    kapt("com.google.dagger:hilt-android-compiler:$hiltVersion")
+    kapt("com.google.dagger:hilt-compiler:$hiltVersion")
+    //NavComponent
+    implementation("androidx.navigation:navigation-fragment-ktx:$navVersion")
+    implementation("androidx.navigation:navigation-ui-ktx:$navVersion")
     //Room
     implementation("androidx.room:room-ktx:2.6.1")
     kapt("androidx.room:room-compiler:2.6.1")
 
-
+    //UnitTesting
     testImplementation("junit:junit:4.13.2")
     testImplementation("io.mockk:mockk:1.12.3")
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.1")
+//    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.1")
+
+    //UITesting
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+
+
 }
