@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">AppDemo</string>
+    <string name="home">Inicio</string>
+    <string name="other">Otro fragment\n</string>
 </resources>

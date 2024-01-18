@@ -45,7 +45,7 @@ dependencies {
 
     val kotlinVersion = "1.9.22"
     val hiltVersion = "2.48"
-    val navVersion = "2.7.1"
+    val navVersion = "2.7.6"
 
     implementation("org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion")
     implementation("androidx.core:core-ktx:1.12.0")
@@ -76,6 +76,9 @@ dependencies {
     //Room
     implementation("androidx.room:room-ktx:2.6.1")
     kapt("androidx.room:room-compiler:2.6.1")
+    //Glide
+    implementation("com.github.bumptech.glide:glide:4.13.0")
+    kapt("com.github.bumptech.glide:compiler:4.13.0")
 
     //UnitTesting
     testImplementation("junit:junit:4.13.2")

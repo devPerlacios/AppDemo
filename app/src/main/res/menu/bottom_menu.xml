@@ -2,12 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/horoscopeFragment"
-        android:title="@string/horoscope"
-        android:icon="@drawable/ic_horoscope"/>
+        android:title="@string/home"
+        android:icon="@drawable/selector_ic_home"/>
 
     <item
         android:id="@+id/luckFragment"
-        android:icon="@drawable/ic_cards"
-        android:title="@string/luck"/>
+        android:title="@string/other"
+        android:icon="@drawable/selector_ic_light"/>
 
 </menu>

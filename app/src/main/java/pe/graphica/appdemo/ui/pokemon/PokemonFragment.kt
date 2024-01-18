@@ -1,43 +1,65 @@
 package pe.graphica.appdemo.ui.pokemon
 
-import android.animation.ObjectAnimator
-import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.view.animation.AlphaAnimation
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
-import android.view.animation.DecelerateInterpolator
-import androidx.core.animation.doOnEnd
-import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.recyclerview.widget.GridLayoutManager
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
+import pe.graphica.appdemo.core.ex.compose
 import pe.graphica.appdemo.databinding.FragmentPokemonBinding
-import java.util.Random
-import javax.inject.Inject
+import pe.graphica.appdemo.databinding.ItemPokemonBinding
+import pe.graphica.appdemo.di.GlideApp
+import pe.graphica.appdemo.domain.model.PokemonItem
+import pe.graphica.appdemo.ui.adapter.OneAdapter
 
 @AndroidEntryPoint
 class PokemonFragment : Fragment() {
+
+    private val pokemonViewModel by viewModels<PokemonViewModel>()
+    private lateinit var storageAdapter: OneAdapter<PokemonItem, ItemPokemonBinding>
 
     private var _binding: FragmentPokemonBinding? = null
     private val binding get() = _binding!!
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initUI()
     }
 
-    private fun shareResult(prediction:String) {
-        val sendIntent: Intent = Intent().apply {
-            action = Intent.ACTION_SEND
-            putExtra(Intent.EXTRA_TEXT, prediction)
-            type = "text/plain"
-        }
+    private fun initUI() {
+        initList()
+        initUIState()
+    }
 
-        val shareIntent = Intent.createChooser(sendIntent, null)
-        startActivity(shareIntent)
+    private fun initList() {
+        storageAdapter = binding.rvPokemon.compose(
+            ItemPokemonBinding::inflate,
+            onBind = { item: PokemonItem, _ ->
+                tvName.text = item.name
+                GlideApp.with(requireContext()).load(item.url).diskCacheStrategy(DiskCacheStrategy.ALL).into(ivUrl)
+            },
+        )
+
+        binding.rvPokemon.apply {
+            layoutManager = GridLayoutManager(context, 2)
+            adapter = storageAdapter
+        }
+    }
+
+    private fun initUIState() {
+//        lifecycleScope.launch {
+//            repeatOnLifecycle(Lifecycle.State.STARTED) {
+//                pokemonViewModel.pokemonItem.collect {
+//                    storageAdapter.submitList(it)
+//                }
+//            }
+//        }
     }
 
     override fun onDestroy() {
