@@ -3,12 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_graph"
-    app:startDestination="@id/horoscopeFragment">
+    app:startDestination="@id/pokemonFragment">
 
     <fragment
         android:id="@+id/pokemonFragment"
         android:name="pe.graphica.appdemo.ui.pokemon.PokemonFragment"
-        android:label="fragment_horoscope"
+        android:label="fragment_pokemon"
+        tools:layout="@layout/fragment_pokemon" >
+    </fragment>
+
+    <fragment
+        android:id="@+id/otherFragment"
+        android:name="pe.graphica.appdemo.ui.pokemon.PokemonFragment"
+        android:label="fragment_pokemon"
         tools:layout="@layout/fragment_pokemon" >
     </fragment>
 

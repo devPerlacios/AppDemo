@@ -7,9 +7,10 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import pe.graphica.appdemo.core.ex.compose
 import pe.graphica.appdemo.databinding.FragmentPokemonBinding
@@ -47,19 +48,19 @@ class PokemonFragment : Fragment() {
         )
 
         binding.rvPokemon.apply {
-            layoutManager = GridLayoutManager(context, 2)
+            layoutManager = LinearLayoutManager(context)
             adapter = storageAdapter
         }
     }
 
     private fun initUIState() {
-//        lifecycleScope.launch {
-//            repeatOnLifecycle(Lifecycle.State.STARTED) {
-//                pokemonViewModel.pokemonItem.collect {
-//                    storageAdapter.submitList(it)
-//                }
-//            }
-//        }
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                pokemonViewModel.uiState.collect {
+                    storageAdapter.submitList(it.list)
+                }
+            }git
+        }
     }
 
     override fun onDestroy() {
