@@ -1,4 +1,4 @@
-package pe.graphica.appdemo.domain
+package pe.graphica.appdemo.domain.usecase
 
 import pe.graphica.appdemo.data.PokemonRepository
 import pe.graphica.appdemo.data.database.entities.toDatabase

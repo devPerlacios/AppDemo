@@ -10,7 +10,6 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import pe.graphica.appdemo.core.ex.compose
 import pe.graphica.appdemo.databinding.FragmentPokemonBinding
@@ -59,7 +58,7 @@ class PokemonFragment : Fragment() {
                 pokemonViewModel.uiState.collect {
                     storageAdapter.submitList(it.list)
                 }
-            }git
+            }
         }
     }
 

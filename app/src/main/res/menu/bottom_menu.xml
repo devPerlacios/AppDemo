@@ -4,9 +4,4 @@
         android:id="@+id/pokemonFragment"
         android:title="@string/home"
         android:icon="@drawable/selector_ic_home"/>
-
-    <item
-        android:id="@+id/otherFragment"
-        android:title="@string/other"
-        android:icon="@drawable/selector_ic_light"/>
 </menu>

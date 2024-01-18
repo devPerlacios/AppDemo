@@ -12,11 +12,4 @@
         tools:layout="@layout/fragment_pokemon" >
     </fragment>
 
-    <fragment
-        android:id="@+id/otherFragment"
-        android:name="pe.graphica.appdemo.ui.pokemon.PokemonFragment"
-        android:label="fragment_pokemon"
-        tools:layout="@layout/fragment_pokemon" >
-    </fragment>
-
 </navigation>

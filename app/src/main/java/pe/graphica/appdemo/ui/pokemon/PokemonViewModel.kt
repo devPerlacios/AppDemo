@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import pe.graphica.appdemo.domain.GetPokemonsUseCase
+import pe.graphica.appdemo.domain.usecase.GetPokemonsUseCase
 import javax.inject.Inject
 
 @HiltViewModel
