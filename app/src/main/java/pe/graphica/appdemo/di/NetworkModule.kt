@@ -11,18 +11,18 @@ import pe.graphica.appdemo.data.network.PokemonApiClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
+import pe.graphica.appdemo.BuildConfig
+
 
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
 
-    private const val BASE_URL = "https://pokeapi.co/api/v2/"
-
     @Singleton
     @Provides
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit{
         return Retrofit.Builder()
-            .baseUrl(BASE_URL)
+            .baseUrl(BuildConfig.BASE_URL)
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
@@ -34,7 +34,7 @@ object NetworkModule {
         return OkHttpClient
             .Builder()
             .addInterceptor(loggingInterceptor)
-            .addInterceptor(authInterceptor)
+//            .addInterceptor(authInterceptor)
             .build()
     }
 

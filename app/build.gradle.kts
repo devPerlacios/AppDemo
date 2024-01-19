@@ -2,7 +2,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("dagger.hilt.android.plugin")
-    id("androidx.navigation.safeargs")
+    id("androidx.navigation.safeargs.kotlin")
     kotlin("kapt")
 }
 
@@ -23,10 +23,19 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = false
+            isDebuggable = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+
+            buildConfigField("String", "BASE_URL", "\"https://pokeapi.co/api/v2/\"")
+        }
+        debug {
+            isDebuggable = true
+            applicationIdSuffix = ".dev"
+
+            buildConfigField("String", "BASE_URL", "\"https://pokeapi.co/api/v2/\"")
         }
     }
     compileOptions {
@@ -38,6 +47,7 @@ android {
     }
     buildFeatures{
         viewBinding = true
+        buildConfig = true
     }
 }
 
@@ -55,27 +65,36 @@ dependencies {
 
     // Fragment
     implementation("androidx.fragment:fragment-ktx:1.6.2")
+
     // Activity
     implementation("androidx.activity:activity-ktx:1.8.2")
+
     // ViewModel
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
+
     // LiveData
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
+
     // Retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation ("com.squareup.okhttp3:logging-interceptor:4.9.1")
+
     //Corrutinas
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
+
     //dagger hilt
     implementation("com.google.dagger:hilt-android:$hiltVersion")
     kapt("com.google.dagger:hilt-compiler:$hiltVersion")
+
     //NavComponent
     implementation("androidx.navigation:navigation-fragment-ktx:$navVersion")
     implementation("androidx.navigation:navigation-ui-ktx:$navVersion")
+
     //Room
     implementation("androidx.room:room-ktx:2.6.1")
     kapt("androidx.room:room-compiler:2.6.1")
+
     //Glide
     implementation("com.github.bumptech.glide:glide:4.13.0")
     kapt("com.github.bumptech.glide:compiler:4.13.0")
