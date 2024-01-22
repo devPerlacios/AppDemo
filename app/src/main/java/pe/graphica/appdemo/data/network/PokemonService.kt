@@ -9,7 +9,7 @@ class PokemonService @Inject constructor(private val api:PokemonApiClient) {
     suspend fun getPokemons(): List<PokemonModel> {
         return withContext(Dispatchers.IO) {
             val response = api.getAllPokemon()
-            response.body() ?: emptyList()
+            response.body()?.results ?: emptyList()
         }
     }
 

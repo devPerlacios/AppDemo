@@ -1,7 +1,9 @@
 package pe.graphica.appdemo.ui.pokemon
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -30,6 +32,7 @@ class PokemonFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initUI()
+        pokemonViewModel.getPokemons()
     }
 
     private fun initUI() {
@@ -42,7 +45,16 @@ class PokemonFragment : Fragment() {
             ItemPokemonBinding::inflate,
             onBind = { item: PokemonItem, _ ->
                 tvName.text = item.name
-                GlideApp.with(requireContext()).load(item.url).diskCacheStrategy(DiskCacheStrategy.ALL).into(ivUrl)
+
+                val regex = Regex("/(\\d+)/\$")
+                val matchResult = regex.find(item.url)
+
+                // Obtén el número de la coincidencia
+                val pokemonNumber = matchResult?.groupValues?.getOrNull(1)
+
+                GlideApp.with(requireContext())
+                    .load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/$pokemonNumber.png")
+                    .diskCacheStrategy(DiskCacheStrategy.ALL).into(ivUrl)
             },
         )
 
@@ -60,6 +72,15 @@ class PokemonFragment : Fragment() {
                 }
             }
         }
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentPokemonBinding.inflate(layoutInflater, container, false)
+        return  binding.root
     }
 
     override fun onDestroy() {

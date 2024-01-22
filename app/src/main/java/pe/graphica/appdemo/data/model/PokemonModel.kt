@@ -4,5 +4,5 @@ import com.google.gson.annotations.SerializedName
 
 data class PokemonModel(
     @SerializedName("name") val name: String,
-    @SerializedName("name") val url: String
+    @SerializedName("url") val url: String
 )
